@@ -54,8 +54,8 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return "fistName=" + fistName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
-				+ ", state=" + state + ", pinCode=" + pinCode + ", phone=" + phone + "";
+		return "fistName=" + fistName + ", lastName=" + lastName + ", address=" + address + ", city=" + city +", state="+ state +
+				 ", pinCode=" + pinCode + ", phone=" + phone + "";
 	}
 	
 

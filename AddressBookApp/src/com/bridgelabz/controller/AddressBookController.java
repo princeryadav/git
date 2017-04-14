@@ -4,8 +4,22 @@ import com.bridgelabz.Service.*;
 
 public class AddressBookController {
 	AddressbookService abs=new AddressBookImp();
-	public void addPerson(){
+	public int addPerson(){
 	abs.addPerson();
-}
-	
+	return 0;
+	}
+	public void deletePerson() {
+		abs.deletePerson();
+		
+	}
+	public void searchPerson(){
+		abs.searchPerson();
+	}
+	public void editPersonInfo() {
+		
+		abs.editPersonInfo();
+	}
+	public void sortByName(){
+		 abs.sortByName();
+	 }
 }	
