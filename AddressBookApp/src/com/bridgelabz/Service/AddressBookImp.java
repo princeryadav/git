@@ -12,6 +12,7 @@ public class AddressBookImp implements AddressbookService{
 	LinkedList <Person> list=null;
 	Scanner scanner=new Scanner(System.in);
 	
+	/*This method is used to add person into address book*/
 	public void addPerson(String adressBookName) {
 		Person person=new Person();
 		System.out.println("Enter your first name:");
@@ -37,12 +38,14 @@ public class AddressBookImp implements AddressbookService{
 		person.setPhone(phoneNumber);
 		if (hasMap.get(adressBookName) == null)
 			hasMap.put(adressBookName, new LinkedList <Person>());
-		hasMap.get(adressBookName).add(person);
-		System.out.println(hasMap);
+			hasMap.get(adressBookName).add(person);
+			System.out.println(hasMap);
 //		list.add(person);
 //		hasMap.put(adressBookName,new LinkedList <Person>());
 	
 	}
+	
+	/*This method is used to delete person from particular address book*/
 	public void deletePerson(String adressBookName){
 		
 		System.out.println("Enter phoneNumber to delete person");
@@ -58,6 +61,8 @@ public class AddressBookImp implements AddressbookService{
 			System.out.println("such phone Number is not exists");
 		}
 	}
+	
+	/*This method is used to search person from particular address book*/
 	public void searchPerson(String adressBookName){
 		
 		System.out.println("Enter person first name to search");
@@ -73,6 +78,8 @@ public class AddressBookImp implements AddressbookService{
 			
 		}
 	}
+	
+	/*This method is used to edit person info from particular address book*/
 	public void editPersonInfo(String adressBookName){
 		char choice;
 		System.out.println("Enter phoneNumber to edit person");
@@ -134,6 +141,8 @@ public class AddressBookImp implements AddressbookService{
 			System.out.println("such phone Number is not exists");
 		}
 	}
+	
+	/*This method is used to sort person by there lastName from particular address book*/
 	public void sortByName(String adressBookName){
 		int s=list.size();
 		String[] object=new String[list.size()];
@@ -149,8 +158,9 @@ public class AddressBookImp implements AddressbookService{
 				}
 			}	
 		}
-		
 	}
+	
+	/*This method is used to sort person by there pincode from particular address book*/
 	public void sortByPinCode(String adressBookName){
 		int s=list.size();
 		String[] object=new String[list.size()];
@@ -168,6 +178,8 @@ public class AddressBookImp implements AddressbookService{
 		}
 		
 	}
+	
+	/*This method is used to display person by there lastName from particular address book*/
 	public void display(String adressBookName){
 		
 		System.out.println("Enter the addressBook name");

@@ -36,31 +36,34 @@ public class AddressBookApp {
 			
 			case 3:
 				addressBookConroller.searchPerson(adressBookName);
+				
 			break;	
 				
 			case 4:
 				addressBookConroller.editPersonInfo(adressBookName);
+				
 			break;
 			
 			case 5:
 				addressBookConroller.sortByName(adressBookName);
+				
 			break;
 			
 			case 6:
 				addressBookConroller.sortByPinCode(adressBookName);
-				break;
 				
+			break;
+			
 			case 7:
 				addressBookConroller.display(adressBookName);
+				
+			break;	
 			}
 			System.out.println("do you want continue the operation....");
 			choice=scanner.next().charAt(0);
 			
 		}while(choice=='Y'||choice=='y');
 			
-			
-		
-		
 		scanner.close();
 		
 	}
