@@ -1,7 +1,11 @@
 package com.bridgelabz.Service;
 import com.bridgelabz.model.*;
 
-
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -40,11 +44,27 @@ public class AddressBookImp implements AddressbookService{
 			hasMap.put(adressBookName, new LinkedList <Person>());
 			hasMap.get(adressBookName).add(person);
 			System.out.println(hasMap);
-//		list.add(person);
-//		hasMap.put(adressBookName,new LinkedList <Person>());
+			try {
+				serializable();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	
 	}
 	
+	private void desrializable() {
+		// TODO Auto-generated method stub
+		try{
+		FileInputStream fileinputStream = new FileInputStream("/home/bridgeit/eclipse/file.ser");
+		   ObjectInputStream ois = new ObjectInputStream(fileinputStream);
+		hasMap=(HashMap<String, LinkedList<Person>>) ois.readObject();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	/*This method is used to delete person from particular address book*/
 	public void deletePerson(String adressBookName){
 		
@@ -141,6 +161,21 @@ public class AddressBookImp implements AddressbookService{
 			System.out.println("such phone Number is not exists");
 		}
 	}
+	public void serializable() throws IOException{
+		try{
+		FileOutputStream fileOutStream = new FileOutputStream("/home/bridgeit/eclipse/file.ser");
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutStream);
+		objectOutputStream.writeObject(hasMap);
+		objectOutputStream.flush();
+		objectOutputStream.close();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		
+	}
+
+	
 	
 	/*This method is used to sort person by there lastName from particular address book*/
 	public void sortByName(String adressBookName){
@@ -181,16 +216,17 @@ public class AddressBookImp implements AddressbookService{
 	
 	/*This method is used to display person by there lastName from particular address book*/
 	public void display(String adressBookName){
-		
+		desrializable();
 		System.out.println("Enter the addressBook name");
-		String name=scanner.next();
-		System.out.println("_____________________________________________________________________________");
+		String name=scanner.next();		System.out.println("_____________________________________________________________________________");
 		System.out.println("\t\t\t\t"+name);
 		System.out.println("_____________________________________________________________________________");
 		System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s %-10s\n","FirstName", "LastName", "Address", "City", "State", "Zip", "MobNO");
 		list=hasMap.get(name);
+		
 		for(int i=0;i<list.size();i++)
 		{
+			
 			System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s %-10s\n",list.get(i).getFistName(),list.get(i).getLastName(),list.get(i).getAddress(),list.get(i).getCity(),list.get(i).getState(),list.get(i).getPinCode(),list.get(i).getPhone());
 		System.out.println("..............................................................................");
 		}
