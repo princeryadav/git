@@ -1,6 +1,5 @@
 package com.bridgelabz.Service;
 import com.bridgelabz.model.*;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -60,6 +59,7 @@ public class AddressBookImp implements AddressbookService{
 		FileInputStream fileinputStream = new FileInputStream("/home/bridgeit/eclipse/file.ser");
 		   ObjectInputStream ois = new ObjectInputStream(fileinputStream);
 		hasMap=(HashMap<String, LinkedList<Person>>) ois.readObject();
+		ois.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -75,11 +75,19 @@ public class AddressBookImp implements AddressbookService{
 			value=hasMap.get(adressBookName).get(i).getPhone();
 			if(value.equals(phoneNumer)){
 				list.remove(hasMap.get(adressBookName).get(i) );
+				
 				System.out.println(hasMap);
+				try {
+					serializable();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return;
-			}else
-			System.out.println("such phone Number is not exists");
+			}
+			
 		}
+		System.out.println("such phone Number is not exists");
 	}
 	
 	/*This method is used to search person from particular address book*/
@@ -91,12 +99,12 @@ public class AddressBookImp implements AddressbookService{
 		for(int i=0;i<list.size();i++){
 			value=hasMap.get(adressBookName).get(i).getFistName();
 			if(value.equals(firstName)){
-				System.out.println("Person is found"+hasMap.get(adressBookName).get(i));
+				System.out.println("Person is found:" +hasMap.get(adressBookName).get(i));
 				return;
-			}else
-				System.out.println("such name is not exists");
+			}	
 			
 		}
+		System.out.println("such name is not exists");
 	}
 	
 	/*This method is used to edit person info from particular address book*/
@@ -128,25 +136,25 @@ public class AddressBookImp implements AddressbookService{
 					case 2:
 						System.out.println("Enter your new city");
 						String newCity=scanner.next();
-						person.setAddress(newCity);
+						person.setCity(newCity);
 					break;
 					
 					case 3:
 						System.out.println("Enter your new state");
 						String newState=scanner.next();
-						person.setAddress(newState);
+						person.setState(newState);;
 					break;
 					
 					case 4:
 						System.out.println("Enter your new pincode");
 						String newPinCode=scanner.next();
-						person.setAddress( newPinCode);
+						person.setPinCode(newPinCode);
 					break;
 					
 					case 5:
 						System.out.println("Enter your new phoneNumber");
 						String newphoneNumber=scanner.next();
-						person.setAddress(newphoneNumber);
+						person.setPhone(newphoneNumber);
 					break;
 					
 					
@@ -156,6 +164,12 @@ public class AddressBookImp implements AddressbookService{
 					
 				}while(choice=='Y'|| choice=='y');
 				System.out.println(hasMap);
+				try {
+					serializable();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return;
 			}else
 			System.out.println("such phone Number is not exists");
